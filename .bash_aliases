@@ -1,0 +1,6 @@
+alias exp='cmd.exe /c explorer .'
+alias vs='cmd.exe /c code .'
+alias r='ranger'
+alias dr='. ranger'
+alias ud='svn-update-all'
+alias rc='cmd.exe /c "reg delete HKCU\Software\5DT\SBS /f"'
