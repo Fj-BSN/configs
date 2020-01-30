@@ -12,20 +12,23 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'terryma/vim-multiple-cursors' " This is complete garbage but havn't found a better alternative
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'junegunn/fzf', { 'dir': '../fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '../fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+" Plug 'rafaqz/ranger.vim' " does not work well on windows, can amange with fzf working
+" Plug 'liuchengxu/vim-which-key' - works sometimes, probably needs more configuration
 
 " This should be added when there is time https://vimawesome.com/plugin/youcompleteme
 
 "This is reuired for snippets with snipmate
-"Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'tomtom/tlib_vim'
-"Plug 'garbas/vim-snipmate'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
 
 " Track the engine.
 "Plug 'SirVer/ultisnips'
 
 " This contains snippets
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -34,8 +37,15 @@ call plug#end()
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+" Mappings for snipmate
+":imap <Tab> <Plug>snipMateNextOrTrigger
+
 " plugin configurations
 let g:airline_theme='jellybeans'
+
+" set ranger to use externam terminal because of bug using gvim
+let g:ranger_terminal = 'urxvt -e'
+let g:ranger_terminal = 'xterm -e'
 
 " basic settings - https://www.shortcutfoo.com/blog/top-50-vim-configuration-options/
 
@@ -79,9 +89,37 @@ set spell
 " keymaps
 
 let mapleader = " "
+"nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
+"vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
 
+"Manging session
 nnoremap <leader>qq :q!<CR>
+
+"Managing file explorer
+map <leader>rr :RangerEdit<cr> " Browse and open files
+map <leader>rv :RangerVSplit<cr> " Browse veritcal split
+map <leader>rs :RangerSplit<cr> " Browse in splits
+map <leader>rt :RangerTab<cr> " Browse in tabs
+map <leader>ri :RangerInsert<cr> " Insert file path
+map <leader>ra :RangerAppend<cr> " Append file path
+map <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@ " Change file path under cursor
+map <leader>rd :RangerCD<cr> " Change current working directory
+map <leader>rld :RangerLCD<cr> " Change current working directory
+
+"Managing files
 nnoremap <leader>fs :w<CR>
+nnoremap <leader>ff :Files<CR>
+
+"Managing buffers
+nnoremap <leader>bb :Buffers<CR>
+nnoremap <leader>bd :bd
+nnoremap <leader>bl :bl
+
+"Managing searches
+nnoremap <leader>sc :noh
+
+"Manage version control - Requires fugitive to be set up
+" nnoremap <leader>gc :Commits<CR>
 
 " maps the window splitting and resizing
 nnoremap <leader>h <C-w>h
@@ -90,7 +128,6 @@ nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 nnoremap <leader>w <C-w>
 
-" convenient toggles
-" line numbers
+" Managing toggles
 nnoremap <leader>tn :set number!<CR>
 nnoremap <leader>tr :set relativenumber!<CR>
