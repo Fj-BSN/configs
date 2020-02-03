@@ -47,15 +47,23 @@ let g:airline_theme='jellybeans'
 let g:ranger_terminal = 'urxvt -e'
 let g:ranger_terminal = 'xterm -e'
 
+" Manage language support for custom extensions
+autocmd BufNewFile,BufRead *.luascn set syntax=lua
+autocmd BufNewFile,BufRead *.luascn set nospell
+autocmd BufNewFile,BufRead *.lua set nospell
+
 " basic settings - https://www.shortcutfoo.com/blog/top-50-vim-configuration-options/
 
 " search settings
+set ignorecase
 set smartcase
 set incsearch
 set hlsearch
 
 " indentation settings
 set autoindent
+set tabstop=4 shiftwidth=0
+"set softabstop=4 shiftwidth=4
 
 " text rendering
 syntax enable
@@ -113,10 +121,10 @@ nnoremap <leader>ff :Files<CR>
 "Managing buffers
 nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>bd :bd
-nnoremap <leader>bl :bl
+nnoremap <leader><tab> :bl<CR>
 
 "Managing searches
-nnoremap <leader>sc :noh
+nnoremap <leader>sc :noh<CR>
 
 "Manage version control - Requires fugitive to be set up
 " nnoremap <leader>gc :Commits<CR>
@@ -126,8 +134,18 @@ nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
+nnoremap <leader>wd <C-w>wq " This needs to be tested
 nnoremap <leader>w <C-w>
 
 " Managing toggles
 nnoremap <leader>tn :set number!<CR>
 nnoremap <leader>tr :set relativenumber!<CR>
+
+" Manage bookmarks
+nnoremap <leader>fj <Cmd>call fzf#run(fzf#wrap({
+	\ 'source': readfile('../bookmarks'),
+	\ 'options': [
+		\ '--multi',
+	\ ],
+\ }))<CR>
+nnoremap <leader>fe :e ../bookmarks<CR>
