@@ -2,6 +2,7 @@
 call plug#begin('../plugged')
 
 Plug 'tpope/vim-surround'
+Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
@@ -42,6 +43,8 @@ call plug#end()
 
 " plugin configurations
 let g:airline_theme='jellybeans'
+let g:user_emmet_mode='a'
+let g:user_emmet_leader_key=' '
 
 " set ranger to use externam terminal because of bug using gvim
 let g:ranger_terminal = 'urxvt -e'
@@ -117,11 +120,21 @@ map <leader>rld :RangerLCD<cr> " Change current working directory
 "Managing files
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fvd : cd
 
 "Managing buffers
 nnoremap <leader>bb :Buffers<CR>
-nnoremap <leader>bd :bd
+nnoremap <leader>bd :bd<CR>
 nnoremap <leader><tab> :bl<CR>
+
+"Managing tabs
+nnoremap <leader>ta :newtab<CR>
+nnoremap <leader>tx :tabc<CR>
+nnoremap <leader>tX :tabc!<CR>
+nnoremap <leader>t^ :tabfir<CR>
+nnoremap <leader>t$ :tablast<CR>
+nnoremap <leader>th :tabmove -1<CR>
+nnoremap <leader>tl :tabmove +1<CR>
 
 "Managing searches
 nnoremap <leader>sc :noh<CR>
@@ -149,3 +162,12 @@ nnoremap <leader>fj <Cmd>call fzf#run(fzf#wrap({
 	\ ],
 \ }))<CR>
 nnoremap <leader>fe :e ../bookmarks<CR>
+
+
+"Misc
+" remove trailing whitespace on save
+" autocmd BufWritePre *.lua,*.luascn %s/\s\+$
+
+nnoremap <leader>ig :noraml! "oyiWdd"pyiWdd"gpwwdE"oPjj^f/;wdt""oPj^fMwwdt;"pPjjjj<CR>
+nnoremap <leader>im :noraml! "oyiWdd"npwwdt "oPf/wdt""oPyiW^wwyt<CR>
+nnoremap <leader>gtd :cd G:\fd\Applications\Mining\VRSM\Data<CR>
