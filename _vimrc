@@ -1,3 +1,6 @@
+"TODO : Investigate https://github.com/freitass/todo.txt-vim vs https://github.com/jceb/vim-orgmode
+
+
 " Enable python support
 " :let &pythonthreedll = '..\vimfiles\python36.dll'
 
@@ -18,6 +21,8 @@ Plug 'altercation/vim-colors-solarized'
 "Plug 'terryma/vim-multiple-cursors' " This is complete garbage but havn't found a better alternative
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 Plug 'junegunn/fzf', { 'dir': '../fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 " Plug 'rafaqz/ranger.vim' " does not work well on windows, can amange with fzf working
@@ -41,6 +46,9 @@ call plug#end()
 "map s <Plug> Sneak_t
 "map S <Plug> Sneak_T
 
+"Limelight use with goyo
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " Trigger configuration for ultisnip snippets. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 "let g:UltiSnipsExpandTrigger="<tab>"
