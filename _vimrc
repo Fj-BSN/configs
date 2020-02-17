@@ -1,29 +1,34 @@
+" Enable python support
+" :let &pythonthreedll = '..\vimfiles\python36.dll'
+
 " manage plugins using plug.vim  https://github.com/junegunn/vim-plug
 call plug#begin('../plugged')
 
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'mattn/emmet-vim'
+"Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
+Plug 'justinmk/vim-sneak'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'sheerun/vim-polyglot'
 Plug 'chaoren/vim-wordmotion'
 Plug 'altercation/vim-colors-solarized'
-Plug 'terryma/vim-multiple-cursors' " This is complete garbage but havn't found a better alternative
+"Plug 'terryma/vim-multiple-cursors' " This is complete garbage but havn't found a better alternative
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'dir': '../fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 " Plug 'rafaqz/ranger.vim' " does not work well on windows, can amange with fzf working
 " Plug 'liuchengxu/vim-which-key' - works sometimes, probably needs more configuration
-
-" This should be added when there is time https://vimawesome.com/plugin/youcompleteme
+"Plug 'lifepillar/vim-mucomplete'
+"Plug 'ycm-core/YouCompleteMe'
 
 "This is reuired for snippets with snipmate
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
+"Plug 'MarcWeber/vim-addon-mw-utils'
+"Plug 'tomtom/tlib_vim'
+"Plug 'garbas/vim-snipmate'
 
 " Track the engine.
 "Plug 'SirVer/ultisnips'
@@ -32,6 +37,10 @@ Plug 'garbas/vim-snipmate'
 " Plug 'honza/vim-snippets'
 
 call plug#end()
+" vim-sneak mappings
+"map s <Plug> Sneak_t
+"map S <Plug> Sneak_T
+
 
 " Trigger configuration for ultisnip snippets. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 "let g:UltiSnipsExpandTrigger="<tab>"
@@ -43,12 +52,12 @@ call plug#end()
 
 " plugin configurations
 let g:airline_theme='jellybeans'
-let g:user_emmet_mode='a'
-let g:user_emmet_leader_key=' '
+"let g:user_emmet_mode='a'
+"let g:user_emmet_leader_key=' '
 
 " set ranger to use externam terminal because of bug using gvim
-let g:ranger_terminal = 'urxvt -e'
-let g:ranger_terminal = 'xterm -e'
+"let g:ranger_terminal = 'urxvt -e'
+"let g:ranger_terminal = 'xterm -e'
 
 " Manage language support for custom extensions
 autocmd BufNewFile,BufRead *.luascn set syntax=lua
@@ -128,7 +137,7 @@ nnoremap <leader>bd :bd<CR>
 nnoremap <leader><tab> :bl<CR>
 
 "Managing tabs
-nnoremap <leader>ta :newtab<CR>
+nnoremap <leader>ta :tabnew<CR>
 nnoremap <leader>tx :tabc<CR>
 nnoremap <leader>tX :tabc!<CR>
 nnoremap <leader>t^ :tabfir<CR>
