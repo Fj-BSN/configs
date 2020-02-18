@@ -14,10 +14,12 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'justinmk/vim-sneak'
-Plug 'MattesGroeger/vim-bookmarks'
+"Plug 'MattesGroeger/vim-bookmarks'
+Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
 Plug 'chaoren/vim-wordmotion'
 Plug 'altercation/vim-colors-solarized'
+Plug 'nanotech/jellybeans.vim'
 "Plug 'terryma/vim-multiple-cursors' " This is complete garbage but havn't found a better alternative
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -85,10 +87,17 @@ set autoindent
 set tabstop=4 shiftwidth=0
 "set softabstop=4 shiftwidth=4
 
+" Configure gui options
+:set guioptions-=m  "remove menu bar
+:set guioptions-=T  "remove toolbar
+:set guioptions-=r  "remove right-hand scroll bar
+:set guioptions-=L  "remove left-hand scroll bar
+
 " text rendering
 syntax enable
 set background=dark
 colorscheme solarized
+"colorscheme jellybeans
 set guifont=Hack
 set encoding=utf-8
 
@@ -138,6 +147,7 @@ map <leader>rld :RangerLCD<cr> " Change current working directory
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fvd : cd
+nnoremap <silent> <Leader>fo :<C-U>silent !start explorer %:p:h:S<CR>
 
 "Managing buffers
 nnoremap <leader>bb :Buffers<CR>
@@ -170,6 +180,7 @@ nnoremap <leader>w <C-w>
 " Managing toggles
 nnoremap <leader>tn :set number!<CR>
 nnoremap <leader>tr :set relativenumber!<CR>
+nnoremap <leader>au :UndotreeToggle<CR>
 
 " Manage bookmarks
 nnoremap <leader>fj <Cmd>call fzf#run(fzf#wrap({
