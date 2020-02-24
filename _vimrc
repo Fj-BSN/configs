@@ -27,6 +27,13 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/fzf', { 'dir': '../fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+
+if has('nvim') || has('patch-8.0.902') "Requires async support
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
+
 " Plug 'rafaqz/ranger.vim' " does not work well on windows, can amange with fzf working
 " Plug 'liuchengxu/vim-which-key' - works sometimes, probably needs more configuration
 "Plug 'lifepillar/vim-mucomplete'
@@ -42,6 +49,8 @@ Plug 'junegunn/fzf.vim'
 
 " This contains snippets
 " Plug 'honza/vim-snippets'
+
+Plug 'vim-scripts/vcscommand.vim'
 
 call plug#end()
 " vim-sneak mappings
@@ -64,6 +73,12 @@ autocmd! User GoyoLeave Limelight!
 let g:airline_theme='jellybeans'
 "let g:user_emmet_mode='a'
 "let g:user_emmet_leader_key=' '
+
+let g:signify_disable_by_default = 0
+let g:signify_line_highlight = 0
+nnoremap <Leader>fvt :SignifyToggle<CR>
+nnoremap <Leader>fvd :SignifyDiff<CR>
+nnoremap <Leader>fvh :SignifyToggleHighlight<CR>
 
 " set ranger to use externam terminal because of bug using gvim
 "let g:ranger_terminal = 'urxvt -e'
@@ -132,22 +147,11 @@ let mapleader = " "
 "Manging session
 nnoremap <leader>qq :q!<CR>
 
-"Managing file explorer
-map <leader>rr :RangerEdit<cr> " Browse and open files
-map <leader>rv :RangerVSplit<cr> " Browse veritcal split
-map <leader>rs :RangerSplit<cr> " Browse in splits
-map <leader>rt :RangerTab<cr> " Browse in tabs
-map <leader>ri :RangerInsert<cr> " Insert file path
-map <leader>ra :RangerAppend<cr> " Append file path
-map <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@ " Change file path under cursor
-map <leader>rd :RangerCD<cr> " Change current working directory
-map <leader>rld :RangerLCD<cr> " Change current working directory
-
 "Managing files
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>ff :Files<CR>
-nnoremap <leader>fvd : cd
 nnoremap <silent> <Leader>fo :<C-U>silent !start explorer %:p:h:S<CR>
+nnoremap <silent> <Leader>fc :<C-U>silent !start cmd /c code %:p:h:S & code %<CR>
 
 "Managing buffers
 nnoremap <leader>bb :Buffers<CR>
