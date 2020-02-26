@@ -5,7 +5,7 @@
 " :let &pythonthreedll = '..\vimfiles\python36.dll'
 
 " manage plugins using plug.vim  https://github.com/junegunn/vim-plug
-call plug#begin('../plugged')
+call plug#begin()
 
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -108,6 +108,9 @@ set tabstop=4 shiftwidth=0
 :set guioptions-=r  "remove right-hand scroll bar
 :set guioptions-=L  "remove left-hand scroll bar
 
+"scrolling
+set so=5
+
 " text rendering
 syntax enable
 set background=dark
@@ -119,6 +122,7 @@ set encoding=utf-8
 " editing
 set foldmethod=syntax
 set backspace=indent,eol,start
+set autoread
 
 " interface options
 set number
@@ -150,13 +154,14 @@ nnoremap <leader>qq :q!<CR>
 "Managing files
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fr :History<CR>
 nnoremap <silent> <Leader>fo :<C-U>silent !start explorer %:p:h:S<CR>
 nnoremap <silent> <Leader>fc :<C-U>silent !start cmd /c code %:p:h:S & code %<CR>
 
 "Managing buffers
 nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>bd :bd<CR>
-nnoremap <leader><tab> :bl<CR>
+nnoremap <leader><tab> :b#<CR>
 
 "Managing tabs
 nnoremap <leader>ta :tabnew<CR>
@@ -183,7 +188,7 @@ nnoremap <leader>w <C-w>
 
 " Managing toggles
 nnoremap <leader>tn :set number!<CR>
-nnoremap <leader>tr :set relativenumber!<CR>
+nnoremap <leader>tr :set relativenumber!<CR>:set relativenumber?<CR>
 nnoremap <leader>au :UndotreeToggle<CR>
 
 " Manage bookmarks
