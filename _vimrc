@@ -184,6 +184,7 @@ nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 nnoremap <leader>wd <C-w>wq " This needs to be tested
+nnoremap <leader>wm <C-w>_<C-w><Bar>
 nnoremap <leader>w <C-w>
 
 " Managing toggles
@@ -205,6 +206,6 @@ nnoremap <leader>fe :e ../bookmarks<CR>
 " remove trailing whitespace on save
 " autocmd BufWritePre *.lua,*.luascn %s/\s\+$
 
-nnoremap <leader>ig :noraml! "oyiWdd"pyiWdd"gpwwdE"oPjj^f/;wdt""oPj^fMwwdt;"pPjjjj<CR>
-nnoremap <leader>im :noraml! "oyiWdd"npwwdt "oPf/wdt""oPyiW^wwyt<CR>
+"Manage frequent directories
 nnoremap <leader>gtd :cd G:\fd\Applications\Mining\VRSM\Data<CR>
+nnoremap <leader>gtv :e C:\Users\User\Desktop\gVimPortable\Data\settings\_vimrc<CR>
