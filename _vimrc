@@ -28,6 +28,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/fzf', { 'dir': '../fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'lifepillar/vim-mucomplete'
+Plug 'wsdjeg/FlyGrep.vim'
 
 if has('nvim') || has('patch-8.0.902') "Requires async support
   Plug 'mhinz/vim-signify'
@@ -57,6 +59,23 @@ call plug#end()
 " vim-sneak mappings
 "map s <Plug> Sneak_t
 "map S <Plug> Sneak_T
+
+" vim-wiki config
+" let wiki_settings={
+ \ 'template_path': vimwiki_export_path',
+ \ 'template_default': 'default',
+ \ 'template_ext': '.html',
+ \ 'auto_export': 0,
+ \ 'nested_syntaxes': {
+ \ 'js':'javascript',
+ \ }}
+
+"Auto complete config for mucomplete
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#minimum_prefix_length = 3
+let g:mucomplete#buffer_relative_paths = 1
+set completeopt=menuone,noselect,noinsert shortmess+=c
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>\<CR>" : "\<CR>"
 
 "Limelight use with goyo
 autocmd! User GoyoEnter Limelight
@@ -115,7 +134,11 @@ set so=5
 " text rendering
 syntax enable
 set background=dark
+if has('nvim') " solarized doesn't work well in the terminal, which is where I mostly use nvim
+	" TODO: find proper cholorscheme for nvim in erminal
+else
 colorscheme solarized
+endif
 "colorscheme jellybeans
 set guifont=Hack
 set encoding=utf-8
@@ -161,7 +184,7 @@ nnoremap <silent> <Leader>fc :<C-U>silent !start cmd /c code %:p:h:S & code %<CR
 
 "Managing buffers
 nnoremap <leader>bb :Buffers<CR>
-nnoremap <leader>bd :bd<CR>
+nnoremap <leader>bx :bd<CR>
 nnoremap <leader><tab> :b#<CR>
 
 "Managing tabs
@@ -175,6 +198,9 @@ nnoremap <leader>tl :tabmove +1<CR>
 
 "Managing searches
 nnoremap <leader>sc :noh<CR>
+if has('nvim') " This plugin doesn't work properly on gvim in windows
+nnoremap <leader>sg :FlyGrep<CR>
+endif
 
 "Manage version control - Requires fugitive to be set up
 " nnoremap <leader>gc :Commits<CR>
@@ -202,7 +228,7 @@ nnoremap <leader>fj <Cmd>call fzf#run(fzf#wrap({
 \ }))<CR>
 nnoremap <leader>fe :e ../bookmarks<CR>
 
-
+inoremap jj <Esc>
 "Misc
 " remove trailing whitespace on save
 " autocmd BufWritePre *.lua,*.luascn %s/\s\+$
