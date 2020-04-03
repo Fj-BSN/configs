@@ -1,4 +1,4 @@
-"TODO : Investigate https://github.com/freitass/todo.txt-vim vs https://github.com/jceb/vim-orgmode
+" TODO : Investigate https://github.com/freitass/todo.txt-vim vs https://github.com/jceb/vim-orgmode
 
 
 " Enable python support
@@ -28,8 +28,9 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/fzf', { 'dir': '../fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'lifepillar/vim-mucomplete'
+" Plug 'lifepillar/vim-mucomplete'
 Plug 'wsdjeg/FlyGrep.vim'
+Plug 'drmikehenry/vim-fontsize'
 
 if has('nvim') || has('patch-8.0.902') "Requires async support
   Plug 'mhinz/vim-signify'
@@ -71,15 +72,20 @@ call plug#end()
  \ }}
 
 "Auto complete config for mucomplete
-let g:mucomplete#enable_auto_at_startup = 1
-let g:mucomplete#minimum_prefix_length = 3
-let g:mucomplete#buffer_relative_paths = 1
-set completeopt=menuone,noselect,noinsert shortmess+=c
-inoremap <expr> <CR> pumvisible() ? "\<C-Y>\<CR>" : "\<CR>"
+" let g:mucomplete#enable_auto_at_startup = 1
+" let g:mucomplete#minimum_prefix_length = 3
+" let g:mucomplete#buffer_relative_paths = 1
+" set completeopt=menuone,noselect,noinsert shortmess+=c
+" inoremap <expr> <CR> pumvisible() ? "\<C-Y>\<CR>" : "\<CR>"
 
 "Limelight use with goyo
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+
+" Disables sound from constant errors while typing - I would like to solve the
+" errors, but I'm not sure how
+autocmd GUIEnter * set vb t_vb=
+
 
 " Trigger configuration for ultisnip snippets. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 "let g:UltiSnipsExpandTrigger="<tab>"
@@ -107,6 +113,10 @@ nnoremap <Leader>fvh :SignifyToggleHighlight<CR>
 " Manage language support for custom extensions
 autocmd BufNewFile,BufRead *.luascn set syntax=lua
 autocmd BufNewFile,BufRead *.luascn set nospell
+autocmd BufNewFile,BufRead *.luascn setlocal commentstring=--\ %s
+autocmd BufNewFile,BufRead *.smeta set syntax=lua
+autocmd BufNewFile,BufRead *.smeta set nospell
+autocmd BufNewFile,BufRead *.smeta setlocal commentstring=--\ %s
 autocmd BufNewFile,BufRead *.lua set nospell
 
 " basic settings - https://www.shortcutfoo.com/blog/top-50-vim-configuration-options/
@@ -120,6 +130,7 @@ set hlsearch
 " indentation settings
 set autoindent
 set tabstop=4 shiftwidth=0
+
 "set softabstop=4 shiftwidth=4
 
 " Configure gui options
@@ -135,7 +146,7 @@ set so=5
 syntax enable
 set background=dark
 if has('nvim') " solarized doesn't work well in the terminal, which is where I mostly use nvim
-	" TODO: find proper cholorscheme for nvim in erminal
+	" TODO: find proper colorscheme for nvim in terminal
 else
 colorscheme solarized
 endif
@@ -145,6 +156,7 @@ set encoding=utf-8
 
 " editing
 set foldmethod=syntax
+set nofoldenable
 set backspace=indent,eol,start
 set autoread
 
