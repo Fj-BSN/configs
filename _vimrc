@@ -225,6 +225,13 @@ nnoremap <leader>l <C-w>l
 nnoremap <leader>wd <C-w>wq " This needs to be tested
 nnoremap <leader>wm <C-w>_<C-w><Bar>
 nnoremap <leader>w <C-w>
+nnoremap <leader>1 1<C-w>w
+nnoremap <leader>2 2<C-w>w
+nnoremap <leader>3 3<C-w>w
+nnoremap <leader>4 4<C-w>w
+nnoremap <leader>5 5<C-w>w
+nnoremap <leader>6 6<C-w>w
+nnoremap <leader>7 7<C-w>w
 
 " Managing toggles
 nnoremap <leader>tn :set number!<CR>
