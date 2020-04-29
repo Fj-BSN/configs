@@ -126,6 +126,7 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
+nnoremap <leader>sf /<C-r>0
 
 " indentation settings
 set autoindent
