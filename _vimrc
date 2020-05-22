@@ -9,7 +9,7 @@ call plug#begin()
 
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-"Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
@@ -38,7 +38,7 @@ else
   Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
 
-" Plug 'rafaqz/ranger.vim' " does not work well on windows, can amange with fzf working
+" Plug 'rafaqz/ranger.vim' " does not work well on windows, can manage with fzf working
 " Plug 'liuchengxu/vim-which-key' - works sometimes, probably needs more configuration
 "Plug 'lifepillar/vim-mucomplete'
 "Plug 'ycm-core/YouCompleteMe'
@@ -98,7 +98,7 @@ autocmd GUIEnter * set vb t_vb=
 " plugin configurations
 let g:airline_theme='jellybeans'
 "let g:user_emmet_mode='a'
-"let g:user_emmet_leader_key=' '
+"let g:user_emmet_leader_key='<Leader>'
 
 let g:signify_disable_by_default = 0
 let g:signify_line_highlight = 0
@@ -126,7 +126,7 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
-nnoremap <leader>sf /<C-r>0
+nnoremap <leader>fs /<C-r>0 'TODO: Need a keybinding that doesn't interfere with seek
 
 " indentation settings
 set autoindent
@@ -252,6 +252,17 @@ inoremap jj <Esc>
 "Misc
 " remove trailing whitespace on save
 " autocmd BufWritePre *.lua,*.luascn %s/\s\+$
+
+"Consistency changes
+nnoremap Y y$
+
+" make n always search forward and N backward
+nnoremap <expr> n 'Nn'[v:searchforward]
+nnoremap <expr> N 'nN'[v:searchforward]
+
+" make ; always "find" forward and , backward
+nnoremap <expr> ; getcharsearch().forward ? ';' : ','
+nnoremap <expr> , getcharsearch().forward ? ',' : ';'
 
 "Manage frequent directories
 nnoremap <leader>gtd :cd G:\fd\Applications\Mining\VRSM\Data<CR>
