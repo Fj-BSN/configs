@@ -202,8 +202,8 @@ nnoremap <leader><tab> :b#<CR>
 
 "Managing tabs
 nnoremap <leader>ta :tabnew<CR>
-nnoremap <leader>tx :tabc<CR>
-nnoremap <leader>tX :tabc!<CR>
+nnoremap <leader>tq :tabc<CR>
+nnoremap <leader>tQ :tabc!<CR>
 nnoremap <leader>t^ :tabfir<CR>
 nnoremap <leader>t$ :tablast<CR>
 nnoremap <leader>th :tabmove -1<CR>
