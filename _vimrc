@@ -208,6 +208,15 @@ nnoremap <leader>t^ :tabfir<CR>
 nnoremap <leader>t$ :tablast<CR>
 nnoremap <leader>th :tabmove -1<CR>
 nnoremap <leader>tl :tabmove +1<CR>
+nnoremap <leader>l1 1gt
+nnoremap <leader>l2 2gt
+nnoremap <leader>l3 3gt
+nnoremap <leader>l4 4gt
+nnoremap <leader>l5 5gt
+nnoremap <leader>l6 6gt
+nnoremap <leader>l7 7gt
+nnoremap <leader>l8 8gt
+nnoremap <leader>l9 9gt
 
 "Managing searches
 nnoremap <leader>sc :noh<CR>
@@ -219,10 +228,6 @@ endif
 " nnoremap <leader>gc :Commits<CR>
 
 " maps the window splitting and resizing
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
 nnoremap <leader>wd <C-w>wq " This needs to be tested
 nnoremap <leader>wm <C-w>_<C-w><Bar>
 nnoremap <leader>w <C-w>
@@ -232,6 +237,8 @@ nnoremap <leader>3 3<C-w>w
 nnoremap <leader>4 4<C-w>w
 nnoremap <leader>5 5<C-w>w
 nnoremap <leader>6 6<C-w>w
+nnoremap <leader>7 7<C-w>w
+nnoremap <leader>7 7<C-w>w
 nnoremap <leader>7 7<C-w>w
 
 " Managing toggles
