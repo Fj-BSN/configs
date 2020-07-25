@@ -1,6 +1,3 @@
-" TODO : Investigate https://github.com/freitass/todo.txt-vim vs https://github.com/jceb/vim-orgmode
-
-
 " Enable python support
 " :let &pythonthreedll = '..\vimfiles\python36.dll'
 
@@ -15,13 +12,11 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'justinmk/vim-sneak'
 Plug 'vimwiki/vimwiki'
-"Plug 'MattesGroeger/vim-bookmarks'
 Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
 Plug 'chaoren/vim-wordmotion'
 Plug 'altercation/vim-colors-solarized'
 Plug 'nanotech/jellybeans.vim'
-"Plug 'terryma/vim-multiple-cursors' " This is complete garbage but havn't found a better alternative
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim'
@@ -38,8 +33,6 @@ else
   Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
 
-" Plug 'rafaqz/ranger.vim' " does not work well on windows, can manage with fzf working
-" Plug 'liuchengxu/vim-which-key' - works sometimes, probably needs more configuration
 "Plug 'lifepillar/vim-mucomplete'
 "Plug 'ycm-core/YouCompleteMe'
 
@@ -57,9 +50,6 @@ endif
 Plug 'vim-scripts/vcscommand.vim'
 
 call plug#end()
-" vim-sneak mappings
-"map s <Plug> Sneak_t
-"map S <Plug> Sneak_T
 
 " vim-wiki config
 " let wiki_settings={
@@ -86,7 +76,6 @@ autocmd! User GoyoLeave Limelight!
 " errors, but I'm not sure how
 autocmd GUIEnter * set vb t_vb=
 
-
 " Trigger configuration for ultisnip snippets. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 "let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -105,10 +94,6 @@ let g:signify_line_highlight = 0
 nnoremap <Leader>fvt :SignifyToggle<CR>
 nnoremap <Leader>fvd :SignifyDiff<CR>
 nnoremap <Leader>fvh :SignifyToggleHighlight<CR>
-
-" set ranger to use externam terminal because of bug using gvim
-"let g:ranger_terminal = 'urxvt -e'
-"let g:ranger_terminal = 'xterm -e'
 
 " Manage language support for custom extensions
 autocmd BufNewFile,BufRead *.luascn set syntax=lua
@@ -178,12 +163,9 @@ set spell
 " happy with default, but good to remember
 " set shell{PATH}
 
-
 " keymaps
 
 let mapleader = " "
-"nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
-"vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
 
 "Manging session
 nnoremap <leader>qq :q!<CR>
@@ -224,9 +206,6 @@ if has('nvim') " This plugin doesn't work properly on gvim in windows
 nnoremap <leader>sg :FlyGrep<CR>
 endif
 
-"Manage version control - Requires fugitive to be set up
-" nnoremap <leader>gc :Commits<CR>
-
 " maps the window splitting and resizing
 nnoremap <leader>wd <C-w>wq " This needs to be tested
 nnoremap <leader>wm <C-w>_<C-w><Bar>
@@ -255,7 +234,6 @@ nnoremap <leader>fj <Cmd>call fzf#run(fzf#wrap({
 \ }))<CR>
 nnoremap <leader>fe :e ../bookmarks<CR>
 
-inoremap jj <Esc>
 "Misc
 " remove trailing whitespace on save
 " autocmd BufWritePre *.lua,*.luascn %s/\s\+$
