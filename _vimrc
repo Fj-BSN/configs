@@ -369,6 +369,18 @@ endif
 " Plug 'honza/vim-snippets'
 "===============================================================================
 
+" Yet to be integrated - These plug-ins seem interesting, but I have not
+" investigated them further. This is essentially a note section so that I do
+" not forget.
+"
+" https://github.com/vim-scripts/YankRing.vim
+" https://github.com/jpalardy/vim-slime
+" https://github.com/mtth/scratch.vim
+" https://github.com/luochen1990/rainbow
+" https://github.com/garbas/vim-snipmate
+" https://github.com/SirVer/ultisnips
+" https://github.com/lifepillar/vim-mucomplete
+ 
 call plug#end()
 
 "===============================================================================
