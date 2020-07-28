@@ -43,6 +43,9 @@
 "===============================================================================
 " Configuration for built-in Vim functionality starts here
 "===============================================================================
+"The comments will only provide a brief label of of what the settings
+"affect. If you would like to know more about a particular setting try typing
+"':help <NameOfSetting>' for example ':help ignorecase'.
 
 " gVim plays an error sound sometimes when typing. This is a workaround to
 " stop the beeping. It disables sound from constant errors while typing 
