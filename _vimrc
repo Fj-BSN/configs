@@ -24,7 +24,7 @@
 " to be the way that I prefer them. No plug-ins are required for this section,
 " and if desired only this section can be copied for a quick starting point.
 " However see the color scheme section under Plug-in support for examples on
-" how to set you color scheme. (The built in color schemes will work with vim
+" how to set your color scheme. (The built in color schemes will work with vim
 " by default, however the ones that are downloaded in the plug-in section
 " cannot be set until after the plug-ins are loaded - which is why the
 " color scheme section has been moved there.
@@ -32,13 +32,14 @@
 " Plug-in support:
 " This section makes it possible to install my preferred plug-ins and manage
 " their settings. Explanations are provided on their functionality per
-" plug-in.
+" plug-in. For this section to work plug.vim must be installed, more
+" information is provided in this section itself.
 "
 " Custom functionality :
-" This section contains code and settings for new features I attempt to
-" integrate or have found online, but not inside plug-ins. No other part of
-" the configuration relies on this section and it can be removed for a cleaner
-" experience.
+" This section contains code and functions for new features I attempted to 
+" integrate or have found online and from other _vimrc files, but not inside
+" of plug-ins. No other part of the configuration relies on this  section and
+" it be removed for a cleaner experience.
 
 "===============================================================================
 " Configuration for built-in Vim functionality starts here
@@ -48,7 +49,7 @@
 "':help <NameOfSetting>' for example ':help ignorecase'.
 
 " gVim plays an error sound sometimes when typing. This is a workaround to
-" stop the beeping. It disables sound from constant errors while typing 
+" stop the beeping. It disables sound from errors while typing. 
 " I would like to solve the errors, but I'm not sure how currently.
 autocmd GUIEnter * set vb t_vb=
 
