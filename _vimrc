@@ -40,6 +40,11 @@
 " integrate or have found online and from other _vimrc files, but not inside
 " of plug-ins. No other part of the configuration relies on this  section and
 " it be removed for a cleaner experience.
+"
+" If you would like to learn more details on how to these functions work and
+" how to add more detailed features to your own _vimrc file, "Learn Vimscript
+" the Hard Way" is a good place to start.
+" https://learnvimscriptthehardway.stevelosh.com/
 
 "===============================================================================
 " Configuration for built-in Vim functionality starts here
@@ -136,10 +141,14 @@ let mapleader = " "
 " These mappings will only work in insert mode
 inoremap <C-x> <Esc>
 
+" Lets you move between splits in insert mode
 inoremap <C-h> <C-o><Left>
 inoremap <C-j> <C-o><Down>
 inoremap <C-k> <C-o><Up>
 inoremap <C-l> <C-o><Right>
+
+" Capitalizes a word
+inoremap <C-u> <C-o>viwbU
 
 "== Normal Mode Mappings ==
 " These mappings will only work in Normal mode
@@ -525,6 +534,15 @@ endif
 " who enjoys adding and changing functionality
 " Uses the gt as in 'go to' mnemonic
 
+" $MYVIMRC is a variable that will hold the path to your _vimrc file
+nnoremap <Leader>gtv :e $MYVIMRC<CR>
+nnoremap <Leader>gtr :so $MYVIMRC<CR>
 nnoremap <Leader>gtd :cd G:\fd\Applications\Mining\VRSM\Data<CR>
-nnoremap <Leader>gtv :e C:\Users\User\Desktop\gVimPortable\Data\settings\_vimrc<CR>
-nnoremap <Leader>gtr :so C:\Users\User\Desktop\gVimPortable\Data\settings\_vimrc<CR>
+" This version opens the vimrc in a vertical split - use whichever is
+" preferred
+"nnoremap <Leader>gtv :vsplit $MYVIMRC<CR>
+"
+"
+"TODO : MAKE SECTION ON ABBREVIATIONS 
+:iabbrev mb fli_dfunc.MakeBoolean
+:iabbrev ms fli_dfunc.MakeScalar
