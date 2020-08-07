@@ -150,7 +150,11 @@ inoremap <C-l> <C-o><Right>
 " Capitalizes a word
 inoremap <C-u> <C-o>viwbU
 
-"== Normal Mode Mappings ==
+"== Visual Mode Mappings ==
+" These mappings will only work in visual mode
+vnoremap q ygvc<C-r>=<C-r>0
+
+"== Normal  Mappings ==
 " These mappings will only work in Normal mode
 
 " Managing buffers and sessions, starts with a q as in 'quit' mnemonic
