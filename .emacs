@@ -69,6 +69,7 @@
 (straight-use-package 'hydra)
 (straight-use-package 'major-mode-hydra)
 (straight-use-package 'company)
+(straight-use-package 'doom-themes)
 
 ;; Set the default font to something more suited to coding
 (set-frame-font "Hack" nil t)
@@ -76,13 +77,44 @@
 ;;sets a darker theme
 (load-theme 'deeper-blue)
 
-;;set some evil settings
+;;Add some evil specific plug-ins to mimic useful vim plug-ins
 (require 'evil-little-word)
-(require 'evil-surround)
 (require 'evil-numbers)
-(require 'evil-unimpaired)
-(require 'evil-commentary)
-(require 'evil-snipe)
+(evil-surround-mode)
+(evil-unimpaired-mode)
+(evil-commentary-mode)
+(evil-snipe-mode)
+
+;; Add useful functions to move lines up and down the same way vim-unimpaired does
+(defun move-line (n)
+  "Move the current line up or down by N lines."
+  (interactive "p")
+  (setq col (current-column))
+  (beginning-of-line) (setq start (point))
+  (end-of-line) (forward-char) (setq end (point))
+  (let ((line-text (delete-and-extract-region start end)))
+    (forward-line n)
+    (insert line-text)
+    ;; restore point to original column in moved line
+    (forward-line -1)
+    (forward-char col)))
+
+(defun move-line-up (n)
+  "Move the current line up by N lines."
+  (interactive "p")
+  (move-line (if (null n) -1 (- n))))
+
+(defun move-line-down (n)
+  "Move the current line down by N lines."
+  (interactive "p")
+  (move-line (if (null n) 1 n)))
+
+;; bind the lien moving functions to vim-unimpaired
+(evil-unimpaired-define-pair "e" '(move-line-up . move-line-down) '(normal visual))
+
+;; define a key to use god-mode in evil-mode
+(evil-define-key 'normal global-map "\\" 'evil-execute-in-god-state)
+(evil-define-key 'god global-map [escape] 'evil-god-state-bail)
 
 ;; set the inferior lisp process
 (setq inferior-lisp-program "clisp.exe")
@@ -97,3 +129,17 @@
 (evil-mode)
 ;;(winum-mode)
 (ido-mode)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("5dd2ef36219b9f109a72da9ea9fba150d0123653f06b44906881824215b16e44" "ecb923cbeddeadab6b60cb64ab56e57a3a910c678480f947ae679a1b824f6de0" "e08833c5dc1ba09647d6f7d2d55579fa25fe1b8c47038513007c41541667d9c8" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
