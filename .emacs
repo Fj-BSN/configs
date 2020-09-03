@@ -70,7 +70,17 @@
 (straight-use-package 'major-mode-hydra)
 (straight-use-package 'company)
 (straight-use-package 'doom-themes)
+(straight-use-package 'exwm)
 
+;; make sure the exwm code is not loaded when in terminal mode
+(when (display-graphic-p)
+    (require 'exwm)
+	(require 'exwm-config)
+	(exwm-config-default))
+
+;; set super key binding 
+(define-key key-translation-map (kbd "<home>") #'event-apply-super-modifier)
+	
 ;; Set the default font to something more suited to coding
 (set-frame-font "Hack" nil t)
 

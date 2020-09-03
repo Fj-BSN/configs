@@ -288,6 +288,11 @@ Plug 'tpope/vim-repeat'
 " explorer.
 Plug 'tpope/vim-vinegar'
 
+" This plugin makes vim save it's session on close so that your work is not
+" lost. See ':help mksession' for information about sessions and the plugin
+" repository for a list of ways it changes this behaviour.
+Plug 'tpope/vim-obsession'
+
 " Provides bindings to use emmet, a popular autocomplete / templating syntax
 " for html / xml files. Google can provide many tutorials.
 Plug 'mattn/emmet-vim'
