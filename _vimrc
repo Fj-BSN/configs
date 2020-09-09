@@ -59,18 +59,36 @@
 autocmd GUIEnter * set vb t_vb=
 
 " Manage language support for custom file extensions
-" These are not common file extensions for lua and can be removed. If you wish
-" to work with lua I recommend keeping only the first line that sets nospell.
-autocmd BufNewFile,BufRead *.lua set nospell
-autocmd BufNewFile,BufRead *.luascn set syntax=lua
-autocmd BufNewFile,BufRead *.luascn set nospell
-autocmd BufNewFile,BufRead *.luascn setlocal commentstring=--\ %s
-autocmd BufNewFile,BufRead *.smeta set syntax=lua
-autocmd BufNewFile,BufRead *.smeta set nospell
-autocmd BufNewFile,BufRead *.smeta setlocal commentstring=--\ %s
+" The 'augroup' block ensures that the commands are not duplicated when this
+" file is reloaded. Run the ':help augroup' command for more information.
+augroup lua_filetype
+	" These settings will be executed only for files that match the expression -
+	" i.e *.lua will run for any files with the .lua file extension.
+	" These are not common file extensions for lua and can be removed. If you wish
+	" to work with lua I recommend keeping only the first line that sets nospell.
+	autocmd BufNewFile,BufRead *.lua set nospell
+	autocmd BufNewFile,BufRead *.luascn set syntax=lua
+	autocmd BufNewFile,BufRead *.luascn set nospell
+	autocmd BufNewFile,BufRead *.luascn setlocal commentstring=--\ %s
+	autocmd BufNewFile,BufRead *.smeta set syntax=lua
+	autocmd BufNewFile,BufRead *.smeta set nospell
+	autocmd BufNewFile,BufRead *.smeta setlocal commentstring=--\ %s
+
+	" These are abbreviations. They will be available in files with the
+	" associated file extension in the same way as the file specific settings
+	" are. To trigger an abbreviation type the trigger and then add a space or
+	" a special character such as a period or an open parenthesis.
+	" Abbreviations are defined as ":iabbrev <trigger> <ExpandedForm>. See
+	" :help iabbrev for more information or use the ':abbreviate' command to
+	" see what abreviations are available to you.
+	autocmd BufNewFile,BufRead *.lua :iabbrev mb fli_dfunc.MakeBoolean
+	autocmd BufNewFile,BufRead *.lua :iabbrev ms fli_dfunc.MakeScalar
+	autocmd BufNewFile,BufRead *.luascn :iabbrev mb fli_dfunc.MakeBoolean
+	autocmd BufNewFile,BufRead *.luascn :iabbrev ms fli_dfunc.MakeScalar
+augroup END
 
 " The following section deals with built in vim settings, for a more detailed
-" explanation of them see the following link
+" explanation of them see the following link or run the 'help' command.
 " basic settings - https://www.shortcutfoo.com/blog/top-50-vim-configuration-options/
 
 "== Search Settings ==
@@ -98,16 +116,19 @@ set tabstop=4 shiftwidth=0
 set so=5
 
 "== Text Visuals and Interface Settings ==
+" Thee look of the editor
 syntax enable
 set background=dark
 set guifont=Hack
 set encoding=utf-8
-set foldmethod=syntax
-set nofoldenable
-set backspace=indent,eol,start
-set autoread
 set number
 set relativenumber
+" Code folding (sometimes called collapsing in other editors.)
+set foldmethod=syntax
+set nofoldenable
+" Misc
+set backspace=indent,eol,start
+set autoread
 
 " store swap files
 " set directory='../swap' this does not work but i want it to
@@ -128,13 +149,36 @@ set spell
 "endif
 
 "== Key Binding and Macro Settings ==
-" NOTE : These do not contains all of the keybindings in this _vimrc file. Plug
-" in specific bindings occur under their plug in sections.
+" NOTE : These do not contains all of the keybindings in this _vimrc file.
+" Plug-in specific bindings occur under their plug-in sections. 
+"
+" These mappings take the form of TypeOfMap <KeyBinding> <Operation>. Some
+" maps execute standard combinations of normal mode keys in a way I find more
+" convenient. Some execute commands. Feel free to use the 'help' command for 
+" commands, however the key combinations will require some knowledge of vim
+" key bindings to understand. For example when you see a mapping such as 
+" 'inoremap <C-u> <C-o>viwbU' the 'help " command will be less useful. This is
+" just a short-hand for a series of key presses that I find myself using often
+" and wish to shorten. Try pressing each key in sequence and seeing the
+" behaviour. The 'help' command will work for individual keystrokes however.
+" So even if ':help viwbgU' won't work, ':help v', ':help iw', ':help b' and
+" ':help gU' will work.
+"
+" See ':help map-modes' for more information on the TypeOfMap part of the
+" bindings.
+
+" Some special bindings to take note of :
+" <Left>, <Right>, <Up>, and <Down> refer to the arrow keys.
+" If you see a mapping that starts with '<C-' that means the control key
+" should be held with the key. For example <C-w> is executed by holding down
+" the control key and then tapping the 'w' key.
+" <CR> refers to the enter key (also called carriage return) 
 
 " The leader key is a way of creating shortcut commands as a sequence of
 " pressed keys, instead of multiple keys held simultaneously. I have set my
 " leader key to spacebar because it is easy to reach with both hands, and the
-" thumbs don't have much else do to anyway.
+" thumbs don't have much else to do anyway. Whenever you see <Leader> in these
+" key-bindings, it refers to whatever mapleader is set as.
 let mapleader = " "
 
 "== Insert Mode Mappings ==
@@ -142,10 +186,10 @@ let mapleader = " "
 inoremap <C-x> <Esc>
 
 " Lets you move between splits in insert mode
-inoremap <C-h> <C-o><Left>
-inoremap <C-j> <C-o><Down>
-inoremap <C-k> <C-o><Up>
-inoremap <C-l> <C-o><Right>
+inoremap <C-h> <C-o><C-w><Left>
+inoremap <C-j> <C-o><C-w><Down>
+inoremap <C-k> <C-o><C-w><Up>
+inoremap <C-l> <C-o><C-w><Right>
 
 " Capitalizes a word
 inoremap <C-u> <C-o>viwbU
@@ -157,7 +201,7 @@ vnoremap q ygvc<C-r>=<C-r>0
 "== Normal  Mappings ==
 " These mappings will only work in Normal mode
 
-" Managing buffers and sessions, starts with a q as in 'quit' mnemonic
+" Closing vim, starts with a q as in 'quit' mnemonic
 nnoremap <Leader>qq :q!<CR>
 nnoremap <Leader>qQ :qa!<CR>
 
@@ -194,7 +238,7 @@ nnoremap <Leader>l9 9gt
 
 " Managing searches, starts with an s as in 'search' mnemonic
 nnoremap <Leader>sc :noh<CR>
-if has('nvim') " This plugin doesn't work properly on gVim in windows
+if has('nvim') " This plug-in doesn't work properly on gVim in windows
 	nnoremap <Leader>sg :FlyGrep<CR>
 endif
 " This is a custom mapping that will search the file for the last copied text
@@ -211,8 +255,8 @@ nnoremap <Leader>4 4<C-w>w
 nnoremap <Leader>5 5<C-w>w
 nnoremap <Leader>6 6<C-w>w
 nnoremap <Leader>7 7<C-w>w
-nnoremap <Leader>7 7<C-w>w
-nnoremap <Leader>7 7<C-w>w
+nnoremap <Leader>8 8<C-w>w
+nnoremap <Leader>9 9<C-w>w
 
 " Managing toggles
 nnoremap <Leader>tn :set number!<CR>
@@ -245,7 +289,7 @@ nnoremap <expr> , getcharsearch().forward ? ',' : ';'
 "===============================================================================
 " Configuration for my plug-ins starts here
 "===============================================================================
-" This section manages plug in packages using plug.vim
+" This section manages plug-in packages using plug.vim
 " NOTE : The plug.vim file must be added to your autoload directory before
 " this configuration will work. More detailed installation instructions are
 " available on the github link.
@@ -265,8 +309,7 @@ call plug#begin()
 
 " Note : The plug.vim syntax points to the repository for the plug-in on
 " github. The string is formatted as '<NameOfUser>/<NameOfRepo>'. The repos
-" will have more info on their respective plugins
-
+" will have more info on their respective plug-ins
 
 " This adds more movement and editing commands for convenience. See Repo for
 " details and keybindings.
@@ -281,15 +324,15 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
 " This allows the vim 'repeat previous action/edit' command to work with the
-" other tpope plugins. 
+" other tpope plug-ins. 
 Plug 'tpope/vim-repeat'
 
 " This adds convenience bindings to use the vim directory manager / file
 " explorer.
 Plug 'tpope/vim-vinegar'
 
-" This plugin makes vim save it's session on close so that your work is not
-" lost. See ':help mksession' for information about sessions and the plugin
+" This plug-in makes vim save it's session on close so that your work is not
+" lost. See ':help mksession' for information about sessions and the plug-in
 " repository for a list of ways it changes this behaviour.
 Plug 'tpope/vim-obsession'
 
@@ -334,18 +377,18 @@ Plug 'vim-airline/vim-airline'
 " previous comment).
 Plug 'vim-airline/vim-airline-themes'
 
-" This plugin is similar to Zen Mode in VSCode. It will add padding to the
+" This plug-in is similar to Zen Mode in VSCode. It will add padding to the
 " file and center it to ease focus. Can be toggled with the command ':Goyo'
 Plug 'junegunn/goyo.vim'
 
-" This plugin dims paragraphs that do not have the cursor in them to ease
+" This plug-in dims paragraphs that do not have the cursor in them to ease
 " focus on the current paragraph. Useful for code reviews. Is currently
 " configured to start when Goyo does, but can be turned on manually with the
 " command ':Limelight', and turned off with ':Limelight!'
 Plug 'junegunn/limelight.vim'
 
 " This integrates with the Linux (or WSL) fzf utility. It allows you to find files in
-" the current directory with a fuzzy search. This plugin may be the most
+" the current directory with a fuzzy search. This plug-in may be the most
 " difficult to install depending on your system, see the repository for any issues
 " and for examples.
 Plug 'junegunn/fzf', { 'dir': '../fzf', 'do': './install --bin' }
@@ -355,14 +398,14 @@ Plug 'junegunn/fzf.vim'
 " work well on windows
 Plug 'wsdjeg/FlyGrep.vim'
 
-" This plug in allows you to interact with various version control systems
+" This plug-in allows you to interact with various version control systems
 " from inside vim. Use the command ':help VCS' to open a split with
 " instructions on the commands
 Plug 'vim-scripts/vcscommand.vim'
 
-" NOTE : This plug in has a special syntax because there is a different version based
+" NOTE : This plug-in has a special syntax because there is a different version based
 " on if you are using vim or neovim.
-" This plug in highlights changes that have been made in version controlled
+" This plug-in highlights changes that have been made in version controlled
 " files. It also allows you to easily jump between those changes, and provides
 " other useful utilities
 if has('nvim') || has('patch-8.0.902') "Requires async support
@@ -402,6 +445,8 @@ endif
 " https://github.com/garbas/vim-snipmate
 " https://github.com/SirVer/ultisnips
 " https://github.com/lifepillar/vim-mucomplete
+" Plug 'zxqfl/tabnine-vim'
+
  
 call plug#end()
 
@@ -432,7 +477,7 @@ nnoremap <Leader>au :UndotreeToggle<CR>
 
 "== This is the Vimwiki configuration section ==
 " These are the configurations for the vim-wiki plug-in. They are essentially
-" the default provided with the plugin.
+" the default provided with the plug-in.
  " let wiki_settings={
  " \ 'template_path': vimwiki_export_path',
  " \ 'template_default': 'default',
@@ -503,7 +548,7 @@ else
 	colorscheme solarized
 endif
 "===============================================================================
-" Configuration for my plugins ends here
+" Configuration for my plug-ins ends here
 "===============================================================================
 
 "===============================================================================
@@ -552,6 +597,3 @@ nnoremap <Leader>gtd :cd G:\fd\Applications\Mining\VRSM\Data<CR>
 "nnoremap <Leader>gtv :vsplit $MYVIMRC<CR>
 "
 "
-"TODO : MAKE SECTION ON ABBREVIATIONS 
-:iabbrev mb fli_dfunc.MakeBoolean
-:iabbrev ms fli_dfunc.MakeScalar
