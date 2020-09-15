@@ -66,12 +66,12 @@ augroup lua_filetype
 	" i.e *.lua will run for any files with the .lua file extension.
 	" These are not common file extensions for lua and can be removed. If you wish
 	" to work with lua I recommend keeping only the first line that sets nospell.
-	autocmd BufNewFile,BufRead *.lua set nospell
-	autocmd BufNewFile,BufRead *.luascn set syntax=lua
-	autocmd BufNewFile,BufRead *.luascn set nospell
+	autocmd BufNewFile,BufRead *.lua setlocal nospell
+	autocmd BufNewFile,BufRead *.luascn setlocal syntax=lua
+	autocmd BufNewFile,BufRead *.luascn setlocal nospell
 	autocmd BufNewFile,BufRead *.luascn setlocal commentstring=--\ %s
-	autocmd BufNewFile,BufRead *.smeta set syntax=lua
-	autocmd BufNewFile,BufRead *.smeta set nospell
+	autocmd BufNewFile,BufRead *.smeta setlocal syntax=lua
+	autocmd BufNewFile,BufRead *.smeta setlocal nospell
 	autocmd BufNewFile,BufRead *.smeta setlocal commentstring=--\ %s
 
 	" These are abbreviations. They will be available in files with the
@@ -85,6 +85,12 @@ augroup lua_filetype
 	autocmd BufNewFile,BufRead *.lua :iabbrev ms fli_dfunc.MakeScalar
 	autocmd BufNewFile,BufRead *.luascn :iabbrev mb fli_dfunc.MakeBoolean
 	autocmd BufNewFile,BufRead *.luascn :iabbrev ms fli_dfunc.MakeScalar
+augroup END
+
+augroup vcs_buffers
+	" This group will be active in the commit buffer provided by the
+	" vcscommand plug in. Useful for spell checking commit messages
+	autocmd FileType vcscommit setlocal spell
 augroup END
 
 " The following section deals with built in vim settings, for a more detailed
@@ -391,6 +397,7 @@ Plug 'junegunn/limelight.vim'
 " the current directory with a fuzzy search. This plug-in may be the most
 " difficult to install depending on your system, see the repository for any issues
 " and for examples.
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install()}}
 Plug 'junegunn/fzf', { 'dir': '../fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 
