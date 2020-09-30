@@ -369,6 +369,8 @@ Plug 'chaoren/vim-wordmotion'
 
 " This is a colorscheme, the default one that is loaded with this file.
 Plug 'altercation/vim-colors-solarized'
+" This colorscheme version is required for NeoVim
+Plug 'overcache/NeoSolarized'
 
 " This is a darker backup theme I sometimes use. You can switch to it with the
 " command ':colorscheme jellybeans'
@@ -422,8 +424,8 @@ else
 endif
 
 " These are a autocomplete plug-ins that allows you to add snippet files. I
-" am still experimenting and trying to make part of my configuration. For
-" anyone copying my _vimrc, feel free to remove this section as it is only 
+" am still experimenting and trying to make them part of my configuration. 
+" For anyone copying my _vimrc, feel free to remove this section as it is only
 " here for me to tinker with when I have time.
 "===============================================================================
 "Plug 'lifepillar/vim-mucomplete'
@@ -446,12 +448,12 @@ endif
 " not forget.
 "
 " https://github.com/vim-scripts/YankRing.vim
-" https://github.com/jpalardy/vim-slime
 " https://github.com/mtth/scratch.vim
 " https://github.com/luochen1990/rainbow
 " https://github.com/garbas/vim-snipmate
 " https://github.com/SirVer/ultisnips
 " https://github.com/lifepillar/vim-mucomplete
+" https://github.com/prabirshrestha/vim-lsp
 " Plug 'zxqfl/tabnine-vim'
 
  
@@ -465,9 +467,9 @@ call plug#end()
 " utility. Each plug-in will have an additional reserved letter for it's
 " functionality after the 'a' to make them easier to manage. An alphabetical
 " summary of current reserved letters is as follows:
-" p : Goyo
-" u : UndroTree
-" v : Signify
+" p : Goyo - p as in Presentation
+" u : UndroTree - u as in Undo
+" v : Signify - v as in Version Control
 
 " NOTE : The VCS and Vimwiki plug-in is a prime example of something that would fall under
 " this binding, however the one I use has many bindings set in a way that
@@ -550,7 +552,7 @@ nnoremap <Leader>avh :SignifyToggleHighlight<CR>
 " use TAB to cycle through the available options.
 if has('nvim') " solarized doesn't work well in the terminal, which is where I mostly use nvim
 	"colorscheme jellybeans
-	" TODO: find proper color scheme for nvim in terminal
+	colorscheme NeoSolarized
 else
 	colorscheme solarized
 endif
@@ -604,3 +606,4 @@ nnoremap <Leader>gtd :cd G:\fd\Applications\Mining\VRSM\Data<CR>
 "nnoremap <Leader>gtv :vsplit $MYVIMRC<CR>
 "
 "
+let $HOME = $VIM
