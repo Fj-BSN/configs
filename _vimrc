@@ -125,7 +125,11 @@ set so=5
 " Thee look of the editor
 syntax enable
 set background=dark
-set guifont=Hack
+if has('nvim')
+	GuiFont! Hack:h9
+else
+  set guifont=Hack:h9
+endif
 set encoding=utf-8
 set number
 set relativenumber
