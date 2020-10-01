@@ -125,11 +125,7 @@ set so=5
 " Thee look of the editor
 syntax enable
 set background=dark
-if has('nvim')
-	GuiFont! Hack:h9
-else
-  set guifont=Hack:h9
-endif
+set guifont=Hack:h9
 set encoding=utf-8
 set number
 set relativenumber
@@ -513,6 +509,8 @@ nnoremap <Leader>ap :Goyo<CR>
 let g:airline_theme='jellybeans'
 " TODO : provide an example (even if commented out) on how to add custom
 " properties to airline
+" let g:airline_section_a = airline#section#create_left(['%{winnr()} ','mode', 'crypt', 'paste', 'keymap', 'spell', 'capslock', 'xkblayout', 'iminsert'])
+let g:airline_section_c = airline#section#create(['%{winnr()} ', '%<', 'path', ' ', 'readonly'])
 
 "== This is the Emmet configuration section ==
 " This changes the key that performs an emmet - style autocomplete.
