@@ -38,8 +38,8 @@
 " Custom functionality :
 " This section contains code and functions for new features I attempted to 
 " integrate or have found online and from other _vimrc files, but not inside
-" of plug-ins. No other part of the configuration relies on this  section and
-" it be removed for a cleaner experience.
+" of plug-ins. No other part of the configuration relies on this section and
+" it can be removed for a cleaner experience.
 "
 " If you would like to learn more details on how to these functions work and
 " how to add more detailed features to your own _vimrc file, "Learn Vimscript
@@ -68,6 +68,7 @@ augroup lua_filetype
 	" to work with lua I recommend keeping only the first line that sets nospell.
 	autocmd BufNewFile,BufRead *.lua setlocal nospell
 	autocmd BufNewFile,BufRead *.luascn setlocal syntax=lua
+	autocmd BufNewFile,BufRead *.luascn setlocal filetype=lua
 	autocmd BufNewFile,BufRead *.luascn setlocal nospell
 	autocmd BufNewFile,BufRead *.luascn setlocal commentstring=--\ %s
 	autocmd BufNewFile,BufRead *.smeta setlocal syntax=lua
@@ -428,6 +429,7 @@ endif
 " For anyone copying my _vimrc, feel free to remove this section as it is only
 " here for me to tinker with when I have time.
 "===============================================================================
+Plug 'dense-analysis/ale'
 "Plug 'lifepillar/vim-mucomplete'
 "Plug 'ycm-core/YouCompleteMe'
 
