@@ -269,6 +269,12 @@ nnoremap <Leader>9 9<C-w>w
 nnoremap <Leader>tn :set number!<CR>
 nnoremap <Leader>tr :set relativenumber!<CR>:set relativenumber?<CR>
 
+" I don't like having to push the indent keys twice just to indent, it should
+" only be a single key. However remapping >> to > proved challenging as a
+" delay is caused before indenting. Using the Tab key as in windows is a work
+" around.
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
 
 "== Consistency Changes section ==
 " Here I try to change built in vim behaviour in a way that makes some aspects
@@ -605,6 +611,7 @@ endif
 nnoremap <Leader>gtv :e $MYVIMRC<CR>
 nnoremap <Leader>gtr :so $MYVIMRC<CR>
 nnoremap <Leader>gtd :cd G:\fd\Applications\Mining\VRSM\Data<CR>
+nnoremap <Leader>gts :so Session.vim<CR>
 " This version opens the vimrc in a vertical split - use whichever is
 " preferred
 "nnoremap <Leader>gtv :vsplit $MYVIMRC<CR>
