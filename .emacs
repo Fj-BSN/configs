@@ -63,6 +63,7 @@
 (straight-use-package 'command-log-mode) ;; clm/toggle-command-log-buffer - logs keypresses and called commands
 (straight-use-package 'counsel) ;; Autocomplete that works with ivy
 (straight-use-package 'crux) ;; Collection of useful functions
+(straight-use-package 'doom-modeline) ;; More modern modeline
 (straight-use-package 'doom-themes) ;; Collection of themes
 (straight-use-package 'evil) ;; Vim emulation
 (straight-use-package 'evil-numbers) ;; Vim emulation for number commands
@@ -100,6 +101,7 @@
  "<escape>" 'keyboard-escape-quit
  "C-." 'custom-goto-emacs-init-file
  "C-<return>" 'crux-smart-open-line-above
+ "C-`" 'winum-select-window-by-number
  "C-c F" 'crux-recentf-find-directory
  "C-c M-d" 'crux-duplicate-and-comment-current-line-or-region
  "C-c d" 'crux-duplicate-current-line-or-region
@@ -112,8 +114,7 @@
  "C-x 4 t" 'crux-transpose-windows
  "C-x C-f" 'counsel-find-file
  "C-x b" 'counsel-switch-buffer
- "M-x" 'counsel-M-x
- "C-`" 'winum-select-window-by-number)
+ "M-x" 'counsel-M-x)
 
 (general-define-key
  :keymaps 'ivy-minibuffer-map
