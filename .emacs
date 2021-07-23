@@ -1,4 +1,4 @@
-;;; This section is just used to attempt to optimize speed
+;; This section is just used to attempt to optimize speed
 
 ;; Avoid garbage collection during startup. The GC eats up quite a bit of time, easily
 ;; doubling the startup time. The trick is to turn up the memory threshold in order to
@@ -36,16 +36,25 @@
 
 ;; Enable useful built-in modes
 ;; (ido-mode 1) ;; Basic auto-complete
-(linum-mode 1) ;; Line numbers
+(column-number-mode t) ;; Column numbers in mode line
+(global-display-line-numbers-mode t) ;; Line numbers
 (windmove-default-keybindings 'shift) ;; Move between splits easily
+
+;; Disable line numbers in certain modes
+(dolist (mode '(eshell-mode-hook
+		shell-mode-hook
+		term-mode-hook
+                org-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Change font
 (set-frame-font "Hack" nil t)
 
 ;; Set dark theme
-(load-theme 'misterioso)
+;; Only built in themes can be set before the packages are loaded
+;; Package themes will be set in teh package specific config
+;; (load-theme 'misterioso)
 
-;; Install packagea manger
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -66,14 +75,19 @@
 (straight-use-package 'doom-modeline) ;; More modern modeline
 (straight-use-package 'doom-themes) ;; Collection of themes
 (straight-use-package 'evil) ;; Vim emulation
+(straight-use-package 'evil-collection) ;; Vim emulation accross popular emacs packages
 (straight-use-package 'evil-numbers) ;; Vim emulation for number commands
 (straight-use-package
- '(evil-plugins :type git :host github :repo "tarao/evil-plugins")) ;; Vim emulation for popular packages
+ '(evil-plugins :type git :host github :repo "tarao/evil-plugins")) ;; Vim emulation that mimics popular vim packages
 (straight-use-package 'evil-surround) ;; Vim emultaion extension that mimics vim-surround
 (straight-use-package 'general) ;; Easier way to bind keys and set a leader key. Works well with evil-mode
 (straight-use-package 'helm) ;; Fuzzy search and completion with bells and whistles
+(straight-use-package 'helpful) ;; 
 (straight-use-package 'ivy) ;; Minimal fuzzy search and completion
+(straight-use-package 'ivy-rich) ;; More detail on ivy and counsel functions
 (straight-use-package 'magit) ;; Version control package for git with utility functions
+(straight-use-package 'rainbow-delimiters) ;; Highlight nested parenthesis
+(straight-use-package 'which-key) ;; Helpful learning buffer that completes commands it is configured for
 (straight-use-package 'winum) ;; Allows you to jump to split by number
 
 ;; Load packages
@@ -81,24 +95,38 @@
 (require 'crux)
 (require 'general)
 (require 'ivy)
+(require 'ivy-rich)
 (require 'winum)
 
+
+(ivy-mode 1)
+(ivy-rich-mode 1)
+(which-key-mode 1)
 (winum-mode 1)
 
 ;; Package specific configurations
 ;; ivy config
-(ivy-mode 1)
 (setq ivy-user-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
+
+;; Which-key config
+(setq which-key-idle-delay 0)
+
+;; Helpful-counsel config
+(setq counsel-describe-function-function #'helpful-callable)
+(setq counsel-describe-variable-function #'helpful-variable)
+
+;; doom-theme config
+(load-theme 'doom-solarized-dark 1)
 
 ;; My Custom functions
 (defun custom-goto-emacs-init-file ()
   (interactive)
   (find-file user-init-file))
 
+
 ;; Add useful key bindings
 (general-define-key
- "<escape>" 'keyboard-escape-quit
  "C-." 'custom-goto-emacs-init-file
  "C-<return>" 'crux-smart-open-line-above
  "C-`" 'winum-select-window-by-number
@@ -110,11 +138,18 @@
  "C-c n" 'cruc-cleanup-buffer-or-region
  "C-c o" 'crux-open-with
  "C-c s" 'swiper
+ "C-h C-C" 'helpful-command
+ "C-h C-d" 'helpful-at-point
+ "C-h F" 'helpful-function
+ "C-h f" 'helpful-callable
+ "C-h k" 'helpful-key
+ "C-h v" 'helpful-variable
  "C-k" 'crux-smart-kill-line
  "C-x 4 t" 'crux-transpose-windows
  "C-x C-f" 'counsel-find-file
  "C-x b" 'counsel-switch-buffer
- "M-x" 'counsel-M-x)
+ "M-x" 'counsel-M-x
+"<escape>" 'keyboard-escape-quit)
 
 (general-define-key
  :keymaps 'ivy-minibuffer-map
@@ -126,4 +161,5 @@
 (general-define-key
  :keymaps 'minibuffer-local-map
  "C-r" 'counsel-minibuffer-history)
+
 
