@@ -73,6 +73,7 @@
 (straight-use-package 'all-the-icons) ;; Fonts for emacs - needed for doom-modeline - the first time using emacs on a new machine, run the command all-the-icons-install-fonts to install teh fonts on the machine OS.
 (straight-use-package 'command-log-mode) ;; clm/toggle-command-log-buffer - logs keypresses and called commands
 (straight-use-package 'counsel) ;; Autocomplete that works with ivy
+(straight-use-package 'counsel-projectile) ;; Autocompletefor projectile
 (straight-use-package 'crux) ;; Collection of useful functions
 (straight-use-package 'doom-modeline) ;; More modern modeline
 (straight-use-package 'doom-themes) ;; Collection of themes
@@ -93,6 +94,7 @@
 (straight-use-package 'ivy) ;; Minimal fuzzy search and completion
 (straight-use-package 'ivy-rich) ;; More detail on ivy and counsel functions
 (straight-use-package 'magit) ;; Version control package for git with utility functions
+(straight-use-package 'projectile) ;; Manage projects
 (straight-use-package 'undo-tree) ;; Advanced undo system
 (straight-use-package 'rainbow-delimiters) ;; Highlight nested parenthesis
 (straight-use-package 'which-key) ;; Helpful learning buffer that completes commands it is configured for
@@ -108,10 +110,12 @@
 (require 'undo-tree)
 (require 'winum)
 
+(counsel-projectile-mode 1)
 (doom-modeline-mode 1)
+(global-undo-tree-mode 1)
 (ivy-mode 1)
 (ivy-rich-mode 1)
-(global-undo-tree-mode 1)
+(projectile-mode 1)
 (which-key-mode 1)
 (winum-mode 1)
 
@@ -147,6 +151,11 @@
 
 ;; doom-theme config
 (load-theme 'doom-solarized-dark 1)
+
+;; projectile config
+(setq projectile-completion-system 'ivy)
+(setq projectile-project-search-path '("C:/Users/booysenf/source/repos/"))
+(setq projectile-switch-project-action #'projectile-dired)
 
 ;; My Custom functions
 (defun custom-goto-emacs-init-file ()
@@ -206,6 +215,7 @@
  "C-c j" 'crux-top-join-line
  "C-c n" 'cruc-cleanup-buffer-or-region
  "C-c o" 'crux-open-with
+ "C-c p" 'projectile-command-map
  "C-c s" 'swiper
  "C-h C-C" 'helpful-command
  "C-h C-d" 'helpful-at-point
@@ -223,9 +233,9 @@
 (general-define-key
  :keymaps 'ivy-minibuffer-map
  "<tab>" 'ivy-alt-done
- "C-l" 'ivy-alt-done
  "C-j" 'ivy-next-line
  "C-k" 'ivy-previous-line)
+ "C-l" 'ivy-alt-done
 
 (general-define-key
  :keymaps 'minibuffer-local-map
@@ -246,12 +256,11 @@
   :prefix "SPC")
 
 (Fj-BSN/leader-keys
-  "h"  '(:ignore t :which-key "quick settings")
-  "ht"  '(hydra-text-scale/body :which-key "text size")
   "a"  '(:ignore t :which-key "apps")
   "au"  '(:ignore t :which-key "undo-tree")
-  "auv" 'undo-tree-visualize
   "aub" 'undo-tree-switch-branch
+  "auv" 'undo-tree-visualize
+  "ap" 'projectile-command-map
   "b"  '(:ignore t :which-key "buffer")
   "b<tab>" 'crux-switch-to-previous-buffer ;; this doesn't work
   "bb" 'counsel-switch-buffer
@@ -263,6 +272,12 @@
   "fs" 'save-buffer
   "g"  '(:ignore t :which-key "goto")
   "gt." 'custom-goto-emacs-init-file
+  "h"  '(:ignore t :which-key "quick settings")
+  "ht"  '(hydra-text-scale/body :which-key "text size")
+  "j"  '(:ignore t :which-key "jump")
+  "jj" 'avy-goto-char-in-line
+  "jl" 'avy-goto-line
+  "jw" 'avy-goto-word-1
   "q"  '(:ignore t :which-key "quit")
   "qq" 'save-buffers-kill-terminal
   "s"  '(:ignore t :which-key "search")
@@ -272,8 +287,4 @@
   "wq" 'delete-window
   "ws" 'evil-window-split
   "wv" 'evil-window-vsplit
-  "j"  '(:ignore t :which-key "jump")
-  "jj" 'avy-goto-char-in-line
-  "jl" 'avy-goto-line
-  "jw" 'avy-goto-word-1
 )
